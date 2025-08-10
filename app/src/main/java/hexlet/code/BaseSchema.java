@@ -18,6 +18,14 @@ public abstract class BaseSchema<T> {
         }
         return checks.values().stream().allMatch(p -> p.test(value));
     }
-
+    public boolean isValidObject(Object value) {
+        try {
+            @SuppressWarnings("unchecked")
+            T castValue = (T) value;
+            return isValid(castValue);
+        } catch (ClassCastException e) {
+            return false;
+        }
+    }
     protected abstract boolean isValueEmpty(T value);
 }

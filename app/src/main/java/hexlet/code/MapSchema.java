@@ -1,7 +1,9 @@
 package hexlet.code.schemas;
 import java.util.Map;
+import java.util.HashMap;
 
 public class MapSchema extends BaseSchema<Map<?, ?>> {
+    private Map<String, BaseSchema<?>> shapeSchemas = new HashMap<>();
     @Override
     protected boolean isValueEmpty(Map<?, ?> value) {
         return value == null;
@@ -17,6 +19,26 @@ public class MapSchema extends BaseSchema<Map<?, ?>> {
                 return !requiredFlag;
             }
             return value.size() == size;
+        });
+        return this;
+    }
+
+    public MapSchema shape(Map<String, BaseSchema<?>> schemas) {
+        this.shapeSchemas = schemas;
+        addCheck("shape", value -> {
+            if (value == null) {
+                return !requiredFlag;
+            }
+            Map<?, ?> mapValue = (Map<?, ?>) value;
+            for (Map.Entry<String, BaseSchema<?>> entry : shapeSchemas.entrySet()) {
+                String key = entry.getKey();
+                BaseSchema<?> schema = entry.getValue();
+                Object val = mapValue.get(key);
+                if (!schema.isValidObject(val)) {
+                    return false;
+                }
+            }
+            return true;
         });
         return this;
     }
