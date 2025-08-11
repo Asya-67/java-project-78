@@ -24,7 +24,8 @@ public class MapSchema extends BaseSchema<Map<?, ?>> {
     }
 
     public MapSchema shape(Map<String, ? extends BaseSchema<?>> schemas) {
-        this.shapeSchemas = schemas;
+        this.shapeSchemas.clear();
+        this.shapeSchemas.putAll(schemas);
         addCheck("shape", value -> {
             if (value == null) {
                 return !requiredFlag;
@@ -34,7 +35,7 @@ public class MapSchema extends BaseSchema<Map<?, ?>> {
                 String key = entry.getKey();
                 BaseSchema<?> schema = entry.getValue();
                 Object val = mapValue.get(key);
-                if (!schema.isValidObject(val)) {
+                if (!schema.isValid(val)) {
                     return false;
                 }
             }
