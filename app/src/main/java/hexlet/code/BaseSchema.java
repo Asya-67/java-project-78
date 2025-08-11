@@ -12,7 +12,7 @@ public abstract class BaseSchema<T> {
         checks.put(name, predicate);
     }
 
-    public boolean isValid(T value) {
+    public final boolean isValid(T value) {
         if (!requiredFlag && isValueEmpty(value)) {
             return true;
         }

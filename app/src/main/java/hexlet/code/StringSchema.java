@@ -1,6 +1,6 @@
 package hexlet.code.schemas;
 
-public class StringSchema extends BaseSchema<String> {
+public final class StringSchema extends BaseSchema<String> {
     @Override
     protected boolean isValueEmpty(String value) {
         return value == null || value.isEmpty();

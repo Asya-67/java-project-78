@@ -2,7 +2,7 @@ package hexlet.code.schemas;
 import java.util.Map;
 import java.util.HashMap;
 
-public class MapSchema extends BaseSchema<Map<?, ?>> {
+public final class MapSchema extends BaseSchema<Map<?, ?>> {
     private Map<String, BaseSchema<?>> shapeSchemas = new HashMap<>();
     @Override
     protected boolean isValueEmpty(Map<?, ?> value) {
