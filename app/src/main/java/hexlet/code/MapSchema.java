@@ -35,7 +35,11 @@ public class MapSchema extends BaseSchema<Map<?, ?>> {
                 String key = entry.getKey();
                 BaseSchema<?> schema = entry.getValue();
                 Object val = mapValue.get(key);
-                if (!schema.isValid(val)) {
+
+                @SuppressWarnings("unchecked")
+                BaseSchema<Object> objSchema = (BaseSchema<Object>) schema;
+
+                if (!objSchema.isValid(val)) {
                     return false;
                 }
             }
