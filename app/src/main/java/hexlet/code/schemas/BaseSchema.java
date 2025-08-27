@@ -24,8 +24,7 @@ public abstract class BaseSchema<T> {
     }
 
     /**
-     * Проверяет, пустое ли значение.
-     * Метод final, переопределять не требуется.
+     * Проверяет, пустое значение.
      */
     protected boolean isValueEmpty(T value) {
         if (value == null) {
