@@ -23,6 +23,10 @@ public abstract class BaseSchema<T> {
         return checks.values().stream().allMatch(p -> p.test(value));
     }
 
+    /**
+     * Проверяет, пустое ли значение.
+     * Метод final, переопределять не требуется.
+     */
     protected boolean isValueEmpty(T value) {
         if (value == null) {
             return true;
