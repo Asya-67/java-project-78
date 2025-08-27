@@ -23,5 +23,16 @@ public abstract class BaseSchema<T> {
         return checks.values().stream().allMatch(p -> p.test(value));
     }
 
-    protected abstract boolean isValueEmpty(T value);
+    protected boolean isValueEmpty(T value) {
+        if (value == null) {
+            return true;
+        }
+        if (value instanceof String) {
+            return ((String) value).isEmpty();
+        }
+        if (value instanceof Map) {
+            return ((Map<?, ?>) value).isEmpty();
+        }
+        return false;
+    }
 }
