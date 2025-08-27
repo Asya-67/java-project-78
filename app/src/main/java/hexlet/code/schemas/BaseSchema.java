@@ -24,7 +24,10 @@ public abstract class BaseSchema<T> {
     }
 
     /**
-     * Проверяет, пустое значение.
+     * Проверяет, пустое ли значение.
+     *
+     * @param value значение для проверки
+     * @return true, если null; иначе false
      */
     protected boolean isValueEmpty(T value) {
         if (value == null) {
